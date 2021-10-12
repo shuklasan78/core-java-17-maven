@@ -1,8 +1,6 @@
 package set;
-
-import com.java.practice.streams.data.Employee;
-import com.java.practice.streams.data.GetData;
-import com.java.practice.streams.data.ProcessRecords;
+import data.Employee;
+import data.GetData;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,13 +1,7 @@
 package Interview.anagram;
 
-import com.java.practice.streams.data.Employee;
-import com.java.practice.streams.data.GetData;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Anagram {
 

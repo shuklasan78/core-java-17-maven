@@ -1,9 +1,8 @@
 package basics;
 
-import com.java.practice.streams.data.Employee;
-import com.java.practice.streams.data.GetData;
-import com.java.practice.streams.data.Person;
-import com.java.practice.streams.data.ProcessRecords;
+import data.Employee;
+import data.GetData;
+import data.ProcessRecords;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

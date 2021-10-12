@@ -1,4 +1,6 @@
-package com.streams.data;
+package data;
+
+import basics.Person;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,18 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessRecords {
-
     public static void main(String[] args) {
         ProcessRecords o1 = new ProcessRecords();
-        //System.out.println(readEmployeesFromCSV(""));
+        System.out.println(readEmployeesFromCSV(""));
     }
 
     public static List<Employee> readEmployeesFromCSV(String filename) {
         String fileName = filename;
         if(filename.isEmpty()) {
-            fileName = "/Users/sandeepkumarshukla/Applications/Technical/Intellij/core-java-17/src/com/java/practice/streams/data/person50krecords.csv";
+            fileName = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/person50krecords.csv";
         } else {
-            fileName = "/Users/sandeepkumarshukla/Applications/Technical/Intellij/core-java-17/src/com/java/practice/streams/data/"+fileName+".csv";
+            fileName = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/"+fileName+".csv";
 
         }
         List<Employee> employees = new ArrayList<>();

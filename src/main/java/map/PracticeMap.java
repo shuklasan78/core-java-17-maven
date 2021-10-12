@@ -1,14 +1,13 @@
 package map;
 
-import com.java.practice.streams.data.Employee;
-import com.java.practice.streams.data.GetData;
-import com.java.practice.streams.data.Person;
-import com.java.practice.streams.data.ProcessRecords;
+import basics.Person;
+import data.Employee;
+import data.GetData;
+import data.ProcessRecords;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PracticeMap {
 

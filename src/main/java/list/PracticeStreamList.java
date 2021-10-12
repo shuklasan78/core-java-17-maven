@@ -1,8 +1,7 @@
 package list;
-
-import com.java.practice.streams.data.Employee;
-import com.java.practice.streams.data.Person;
-import com.java.practice.streams.data.ProcessRecords;
+import basics.Person;
+import data.Employee;
+import data.ProcessRecords;
 import lombok.val;
 
 import java.util.*;

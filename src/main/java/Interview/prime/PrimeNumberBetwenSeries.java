@@ -1,7 +1,7 @@
 package Interview.prime;
 
-import com.java.practice.streams.data.Employee;
-import com.java.practice.streams.data.GetData;
+import data.Employee;
+import data.GetData;
 
 import java.util.*;
 import java.util.stream.Collectors;

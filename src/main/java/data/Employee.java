@@ -1,4 +1,4 @@
-package com.streams.data;
+package data;
 
 import lombok.*;
 
