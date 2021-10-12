@@ -20,7 +20,7 @@ public class ProcessRecords {
     public static List<Employee> readEmployeesFromCSV(String filename) {
         String fileName = filename;
         if(filename.isEmpty()) {
-            fileName = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/person50krecords.csv";
+            fileName = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/personfewrecords.csv";
         } else {
             fileName = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/"+fileName+".csv";
 
