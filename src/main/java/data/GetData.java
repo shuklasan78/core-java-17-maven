@@ -19,6 +19,12 @@ public class GetData {
         List<Employee> originalList = ProcessRecords.readEmployeesFromCSV("personfewrecords");
         return originalList;
     }
+
+    public static List<Employee> getListWithDuplicateRecords() {
+        List<Employee> originalList = ProcessRecords.readEmployeesFromCSV("personduplicaterecords");
+        return originalList;
+    }
+
     public static List<Employee> getListWith50KRecords() {
         List<Employee> originalList = ProcessRecords.readEmployeesFromCSV("person50krecords");
         return originalList;

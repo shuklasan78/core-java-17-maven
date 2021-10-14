@@ -6,9 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -16,19 +14,63 @@ public class ImplementMergeSort {
 
 
     public static void main(String[] args) {
-        //getEmployeeArray();
-        long start = System.currentTimeMillis();
-        getSortedArraysBasedOnIdUsingMergerSort();
-        long finish = System.currentTimeMillis();
-        log.info("MergerSort Time :"+Long.valueOf(finish-start).toString());
-
-        start = System.currentTimeMillis();
-        sortArrayUsingStreams();
-        finish = System.currentTimeMillis();
-        log.info("Stream sort Time :"+Long.valueOf(finish-start).toString());
 
     }
 
+    private static void sortingArrayComparison() {
+        testQuickortingWithArray();
+        getSortedArraysBasedOnIdUsingMergerSort();
+        sortArrayUsingStreams();
+    }
+    private static void testQuickortingWithArray() {
+        long start = System.currentTimeMillis();
+
+        Employee[] empArray = getEmployeeArray();
+        int n = empArray.length;
+        Quick q1 = new Quick();
+        q1.printArr(empArray, n);
+        q1.quick(empArray, 0, n - 1);
+        q1.printArr(empArray, n);
+        long finish = System.currentTimeMillis();
+        log.info("Quicksort Time :"+Long.valueOf(finish-start).toString());
+
+    }
+
+    private static void getSortedArraysBasedOnIdUsingMergerSort() {
+        Employee[] empArray = getEmployeeArray();
+        long start = System.currentTimeMillis();
+        mergeSort(empArray,empArray.length-1);
+        long finish = System.currentTimeMillis();
+        log.info("MergeSort. :"+Long.valueOf(finish-start).toString());
+        var counter =0;
+        /*for(Employee emp : empArray) {
+            if(counter<=10) {
+                //log.info("EmpId={} :"+emp.getEmpId()+"    FirstName  :"+emp.getFirstname());
+            }
+            counter++;
+        }*/
+
+    }
+    private static void sortArrayUsingStreams() {
+        Employee[] empArray = getEmployeeArray();
+        long start = System.currentTimeMillis();
+        Arrays.sort(empArray, Comparator.comparing(Employee::getEmpId));
+        long finish = System.currentTimeMillis();
+        log.info("Stream Sort  :"+Long.valueOf(finish-start).toString());
+        //Arrays.sort(employees, Comparator.comparing(Employee::getName).reversed());
+       /* var counter =0;
+        for(Employee emp : empArray) {
+            if(counter<=10) {
+                log.info("EmpId={} :"+emp.getEmpId()+"    FirstName  :"+emp.getFirstname());
+            }
+            counter++;
+        }*/
+    }
+    private static void executeOtherMethod() {
+
+        getDuplicateFromArrays();
+        getStreamsWithArrays();
+    }
 
     private static Employee[] getEmployeeArray() {
         long start = System.currentTimeMillis();
@@ -43,38 +85,34 @@ public class ImplementMergeSort {
         //log.info("Total Number of records :"+empList.size());
         return emp;
     }
-
-    private static void getSortedArraysBasedOnIdUsingMergerSort() {
-        Employee[] empArray = getEmployeeArray();
-        long start = System.currentTimeMillis();
-        mergeSort(empArray,empArray.length-1);
-        long finish = System.currentTimeMillis();
-        log.info("Time taken to sort the arrays. :"+Long.valueOf(finish-start).toString());
-        var counter =0;
-        for(Employee emp : empArray) {
-            if(counter<=10) {
-                log.info("EmpId={} :"+emp.getEmpId()+"    FirstName  :"+emp.getFirstname());
+    private static void getDuplicateFromArrays() {
+        Map<Integer, Integer> nameAndCount = new HashMap<>();
+        Map<Integer, List<Employee>> otherMap = new HashMap<>();
+        List<Employee> listEmployee = new ArrayList<>();
+        Employee[] arrEmp = getEmployeeArray();
+        for(Employee emp : arrEmp) {
+            Integer count = nameAndCount.get(emp.getEmpId());
+            if (count == null) {
+                nameAndCount.put(emp.getEmpId(), 1);
+            } else {
+                nameAndCount.put(emp.getEmpId(), ++count);
+                listEmployee.add(emp);
+                otherMap.put(emp.getEmpId(),listEmployee);
             }
-            counter++;
         }
+        System.out.println(otherMap.keySet());
+        Map<Integer, List<Employee>> otherMap2 = new HashMap<>();
+        for(Integer value : otherMap.keySet()) {
+            if(value>=1) {
+                otherMap2.put(value,otherMap2.get(value));
+            }
+        }
+            log.info("duplicate={}"+otherMap2.size());
 
     }
 
-    private static void sortArrayUsingStreams() {
-        Employee[] empArray = getEmployeeArray();
-        long start = System.currentTimeMillis();
-        Arrays.sort(empArray, Comparator.comparing(Employee::getEmpId));
-        long finish = System.currentTimeMillis();
-        log.info("Time taken to sort the arrays. :"+Long.valueOf(finish-start).toString());
-        //Arrays.sort(employees, Comparator.comparing(Employee::getName).reversed());
-        var counter =0;
-        for(Employee emp : empArray) {
-            if(counter<=10) {
-                log.info("EmpId={} :"+emp.getEmpId()+"    FirstName  :"+emp.getFirstname());
-            }
-            counter++;
-        }
-    }
+
+
 
     private static void getSortingBasedOnStreams() {
         long start = System.currentTimeMillis();
@@ -94,6 +132,16 @@ public class ImplementMergeSort {
 //            counter++;
 //        }
     }
+
+    private static void getStreamsWithArrays() {
+        Employee[] empArray = getEmployeeArray();
+        Employee maxAge = Arrays.stream(empArray)
+                .max(Comparator.comparing(Employee::getSalary))
+                .orElseThrow(NoSuchElementException::new);
+        log.info("Max Age :"+maxAge.getUserName());
+
+    }
+
 
 
     public static void merge(Employee[] a, Employee[] l, Employee[] r, int left, int right) {
