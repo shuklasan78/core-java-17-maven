@@ -39,4 +39,9 @@ public class GetData {
         List<Employee> originalList = ProcessRecords.readEmployeesFromCSV("persontwomillionrecords");
         return originalList;
     }
+
+    public static List<SalesData> getFiveMillionSalesRecord() {
+        List<SalesData> originalList = ProcessSalesRecords.readSalesDataFromCSV("salesfivemillionssalesrecords");
+        return originalList;
+    }
 }

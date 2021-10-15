@@ -7,7 +7,7 @@ public class Quick {
 place the pivot at its exact position, and place
 smaller elements to left of pivot and greater
 elements to right of pivot.  */
-    int partition(Employee a[], int start, int end) {
+    public int partition(Employee a[], int start, int end) {
         Employee pivot = a[end]; // pivot element
         int i = (start - 1);
 
@@ -27,7 +27,7 @@ elements to right of pivot.  */
     }
 
     /* function to implement quick sort */
-    void quick(Employee a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
+    public void quick(Employee a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */ {
         if (start < end) {
             int p = partition(a, start, end);  //p is partitioning index
             quick(a, start, p - 1);
@@ -36,7 +36,7 @@ elements to right of pivot.  */
     }
 
     /* function to print an array */
-    void printArr(Employee a[], int n) {
+    public void printArr(Employee a[], int n) {
         int i;
         for (i = 0; i < n; i++) {
             //System.out.print(a[i].getEmpId() + " ");
