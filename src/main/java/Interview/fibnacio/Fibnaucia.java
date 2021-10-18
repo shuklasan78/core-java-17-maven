@@ -8,8 +8,8 @@ public class Fibnaucia {
 
     public static void main(String[] args) {
 
-        //fibSeriesWithSimpleLogic();
-        System.out.println(fib(10));
+        fibSeriesWithSimpleLogic();
+       //System.out.println(fib(6));
     }
 
     private static int fibSeriesWithSimpleLogic() {
@@ -21,7 +21,7 @@ public class Fibnaucia {
 
        var finList = new ArrayList<BigInteger>();
 
-        for (int i = 2; i < 30; i++)//loop starts from 2 because 0 and 1 are already printed
+        for (int i = 2; i < 6; i++)//loop starts from 2 because 0 and 1 are already printed
         {
             n3 = n1 + n2;
             System.out.print(" " + n3);
@@ -36,13 +36,6 @@ public class Fibnaucia {
         System.out.println("   The sum is :"+sum);
         return n3;
     }
-    public static int fib(int n) {
-        if (n == 0) {
-            return 0;
-        } if (n == 1) {
-            return 1;
-        }
-        return fib(n - 1) + fib(n - 2);
-    }
+
 
 }
