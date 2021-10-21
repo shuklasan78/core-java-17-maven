@@ -102,3 +102,32 @@ SurvivorRatio can be used to tune the size of the survivor spaces, but this is o
 Example of using -XX:SurvivorRatio > -XX:SurvivorRatio=6 sets the ratio between each survivor space and eden to be 1:6.
 
 ``` 
+#### Sorting Reference
+ ```text
+//Sorting a List
+Collections.sort(numbersList);
+Collections.sort(numbersList, Collections.reverseOrder());
+ 
+//Sorting a Set
+Set to List -> Sort -> List to Set
+Collections.sort(numbersList);
+ 
+//Sorting a Map
+TreeMap<Integer, String> treeMap = new TreeMap<>(map);
+ 
+unsortedeMap.entrySet()
+    .stream()
+    .sorted(Map.Entry.comparingByValue())
+    .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+ 
+//Java 8 Lambda
+Comparator<Employee> nameSorter = (a, b) -> a.getName().compareToIgnoreCase(b.getName());
+Collections.sort(list, nameSorter);
+ 
+Collections.sort(list, Comparator.comparing(Employee::getName));
+ 
+//Group By Sorting
+Collections.sort(list, Comparator
+                        .comparing(Employee::getName)
+                        .thenComparing(Employee::getDob));
+ ``` 
