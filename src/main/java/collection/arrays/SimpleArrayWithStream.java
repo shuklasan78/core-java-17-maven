@@ -1,6 +1,11 @@
 package collection.arrays;
 
-import java.util.Arrays;
+import data.Employee;
+import data.GetData;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SimpleArrayWithStream {
@@ -9,6 +14,9 @@ public class SimpleArrayWithStream {
         arraysAsStream();
     }
 
+    /**
+     *
+     */
     private static void arraysAsStream() {
         String[] array = {"a", "b", "c", "d", "e"};
         //Arrays.stream
@@ -28,5 +36,56 @@ public class SimpleArrayWithStream {
         });
     }
 
+    private static Employee[] listConvertToArrays() {
+        Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
+        List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
+        for(Employee emp : lstEmp) {
+            //System.out.println("Sorting List Differently :"+emp.getEmpId());
+        }
+        Employee[] empArray = new Employee[lstEmp.size()];
+        empArray = lstEmp.toArray(empArray);
+        return empArray;
+    }
 
+    private static Set<Employee> arrayConvertedToSet() {
+        Employee[] empArray = listConvertToArrays();
+        Set<Employee> targetSet = new HashSet<Employee>(Arrays.asList(empArray));
+        return targetSet;
+    }
+
+    private static Map<Integer, Employee> arraysConvertedToMap() {
+        List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(Comparator.comparingInt(Employee::getEmpId)).collect(Collectors.toList());
+        final Employee[] empArrayValues = listConvertToArrays();
+        Integer[] keys = lstEmp.stream().map(Employee::getEmpId).toArray(Integer[]::new);
+        System.out.println("empArrayValues   :"+empArrayValues.length+"    keys   :"+keys.length);
+        if(keys.length != empArrayValues.length) {
+            throw new IllegalArgumentException("Keys and Values need to have the same length.");
+        }
+        //cannot work becasue of duplicate keys
+        Map<Integer,Employee> map = IntStream.range(0, keys.length).boxed()
+                .collect(Collectors.toMap(i -> empArrayValues[i].getEmpId(), i -> empArrayValues[i],(oldValue, newValue) -> newValue));
+
+        System.out.println("The converted map from Arrays length is :"+map.size());
+        //.collect(Collectors.toMap(Employee::getEmpId, Function.identity(), (oldValue, newValue) -> newValue));
+
+        return map;
+        //int[] ages = persons.stream().mapToInt(Person::getAge).distinct().toArray();
+    }
+
+    private static void sortArraysDifferently() {
+
+        Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
+        List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
+        Employee[] empArray = new Employee[lstEmp.size()];
+        empArray = lstEmp.toArray(empArray);
+        Arrays.sort(empArray, Comparator.comparing(Employee::getEmpId));  // two ways to comparing
+        for (Employee emp : empArray) {
+            System.out.println("Arrays ID  :" + emp.getEmpId());
+        }
+        Comparator<Employee> nameSorter = (a, b) -> a.getUserName().compareToIgnoreCase(b.getUserName());
+        Arrays.sort(empArray, nameSorter);
+        for (Employee emp : empArray) {
+            System.out.println("Arrays username  :" + emp.getUserName());
+        }
+    }
 }
