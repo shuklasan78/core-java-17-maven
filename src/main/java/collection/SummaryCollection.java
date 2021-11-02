@@ -54,7 +54,6 @@ public class SummaryCollection {
        //convert list to HashMap
         Map<Integer, List<Employee>> choiceMap =
                 empList.stream().collect(Collectors.groupingBy(choice -> choice.getEmpId()));
-        log.info("Map Size is :"+choiceMap.size());
         //convert list to map replace with new value
         Map<Integer, Employee> choiceMap1 =empList.stream().collect(Collectors.toMap(Employee::getEmpId, Function.identity(),(n,o)->n));
         //cpnvert list to map when there are no duplicates
