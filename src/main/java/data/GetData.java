@@ -2,7 +2,10 @@ package data;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 @Slf4j
 public class GetData {
 
@@ -44,4 +47,32 @@ public class GetData {
         List<SalesData> originalList = ProcessSalesRecords.readSalesDataFromCSV("salesfivemillionssalesrecords");
         return originalList;
     }
+
+    public static List<Employee> getRecords(String records) {
+
+        List<Employee> originalList = ProcessRecords.readEmployeesFromCSV(records);
+        return originalList;
+    }
+
+    public static Employee[] getEmployeeArray() {
+        List<Employee> empList = GetData.getListWithDuplicateRecords();        // Get List
+        Employee[] empArray = new Employee[empList.size()];
+        empArray = empList.toArray(empArray);
+        return empArray;
+    }
+
+    public static Set<Employee> getEmployeSet() {
+        Employee[] empArray = getEmployeeArray();
+        Set<Employee> empSet = new HashSet<>(Arrays.asList(empArray));
+        return empSet;
+    }
+
+    public static Map<Integer, Employee> getEmployeeMap() {
+        final Employee[] empArr = getEmployeeArray();
+        Map<Integer,Employee> employeMap = IntStream.range(0, empArr.length-1).boxed()
+                .collect(Collectors.toMap(i -> empArr[i].getEmpId() , i-> empArr[i], (oldValue, newValue)->newValue));
+        return employeMap;
+    }
+
+
 }

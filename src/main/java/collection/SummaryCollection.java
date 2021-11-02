@@ -125,14 +125,9 @@ public class SummaryCollection {
            ageSet.add(employee.getAgeInYrs());
         }
         System.out.println("AgesSet is :"+ageSet);
-
-
         //convert map to List
         List<Employee> empList  = mapEmployee.values().stream().toList();
         System.out.println("List Size from Map is : :"+empList.size());
-
-
-
         }
 
     private static void mapIterate() {
@@ -161,5 +156,7 @@ public class SummaryCollection {
             System.out.println("Key : " + entry.getKey() + " value : " + entry.getValue());
         }
     }
+
+
 
 }
