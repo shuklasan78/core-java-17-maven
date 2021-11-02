@@ -45,10 +45,10 @@ public class SummaryCollection {
         //Convert Arrays to list
         List<Employee> empList = Arrays.asList(getEmployeeArray());
         //convert list to Set.
-       Set<Employee> empSet = new HashSet<>(empList);
-       //java 10 onwards
+        Set<Employee> empSet = new HashSet<>(empList);
+        //java 10 onwards
         Set<Employee> empSet10 = Set.copyOf(empList);
-       //convert list to HashMap
+        //convert list to HashMap
         Map<Integer, List<Employee>> choiceMap =
                 empList.stream().collect(Collectors.groupingBy(choice -> choice.getEmpId()));
         System.out.println("Map Size is :"+choiceMap.size());
