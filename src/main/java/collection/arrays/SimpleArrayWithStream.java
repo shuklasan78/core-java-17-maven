@@ -3,6 +3,7 @@ package collection.arrays;
 import data.Employee;
 import data.GetData;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,7 +37,7 @@ public class SimpleArrayWithStream {
         });
     }
 
-    private static Employee[] listConvertToArrays() {
+    private static Employee[] listConvertToArrays() throws IOException {
         Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
         List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
         for(Employee emp : lstEmp) {
@@ -47,13 +48,13 @@ public class SimpleArrayWithStream {
         return empArray;
     }
 
-    private static Set<Employee> arrayConvertedToSet() {
+    private static Set<Employee> arrayConvertedToSet() throws IOException {
         Employee[] empArray = listConvertToArrays();
         Set<Employee> targetSet = new HashSet<Employee>(Arrays.asList(empArray));
         return targetSet;
     }
 
-    private static Map<Integer, Employee> arraysConvertedToMap() {
+    private static Map<Integer, Employee> arraysConvertedToMap() throws IOException {
         List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(Comparator.comparingInt(Employee::getEmpId)).collect(Collectors.toList());
         final Employee[] empArrayValues = listConvertToArrays();
         Integer[] keys = lstEmp.stream().map(Employee::getEmpId).toArray(Integer[]::new);
@@ -72,7 +73,7 @@ public class SimpleArrayWithStream {
         //int[] ages = persons.stream().mapToInt(Person::getAge).distinct().toArray();
     }
 
-    private static void sortArraysDifferently() {
+    private static void sortArraysDifferently() throws IOException {
 
         Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
         List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());

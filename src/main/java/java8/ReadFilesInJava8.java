@@ -13,7 +13,7 @@ public class ReadFilesInJava8 {
 
     public static void main(String[] args) throws IOException {
 
-        List<String> lines = readFileSimple("personfewrecords.csv");
+        List<String> lines = readFileSimple("EmployeeFewRecords.csv");
         System.out.println("Line "+lines);
     }
 

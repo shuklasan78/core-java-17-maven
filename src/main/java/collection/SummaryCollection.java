@@ -3,6 +3,7 @@ package collection;
 import data.Employee;
 import data.GetData;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class SummaryCollection {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //practiceArrayCollection();
         //practiceArraySorting();
         //playWithList();
@@ -19,7 +20,7 @@ public class SummaryCollection {
         mapIterate();
     }
 
-    private static void practiceArrayCollection() {
+    private static void practiceArrayCollection() throws IOException {
         List<Employee> empList = GetData.getListWithfewRecords();        // Get List
         Employee[] empArray = new Employee[empList.size()];
         empArray = empList.toArray(empArray);                                   // Convert List into Arrays
@@ -32,19 +33,19 @@ public class SummaryCollection {
                 .collect(Collectors.toMap(i -> temp[i].getEmpId(), i -> temp[i],(oldValue, newValue) -> newValue));
     }
 
-    private static void practiceArraySorting() {
+    private static void practiceArraySorting() throws IOException {
         Comparator<Employee> sorter = (a,b)-> a.getEmpId().compareTo(b.getEmpId());
         Comparator<Employee> sorterName = (a,b) -> a.getFirstname().compareTo(b.getFirstname());
         Comparator<Employee> sorter1 = Comparator.comparingInt(Employee::getEmpId);
 
-        List<Employee> empList = GetData.getListWithOneMillionRecords();        // Get List
+        List<Employee> empList = GetData.getListWithOneMRecords();        // Get List
         Employee[] empArray = new Employee[empList.size()];
         Arrays.sort(empArray,sorter);   // First way
         Arrays.sort(empArray,Comparator.comparing(Employee::getEmpId)); //Second Way
 
     }
 
-    private static void playWithList() {
+    private static void playWithList() throws IOException {
         //Convert Arrays to list
         List<Employee> empList = Arrays.asList(getEmployeeArray());
         //convert list to Set.
@@ -67,7 +68,7 @@ public class SummaryCollection {
 
     }
 
-    private static void playWithListComparator() {
+    private static void playWithListComparator() throws IOException {
         Comparator<Employee> empSorterEmpId = (a,b) -> a.getEmpId().compareTo(b.getEmpId());
         Comparator<Employee> empSorterName = (a,b) -> a.getFirstname().compareTo(b.getFirstname());
         Comparator<Employee> empSorterOtherWayEmpId = Comparator.comparing(Employee::getEmpId);
@@ -85,27 +86,27 @@ public class SummaryCollection {
 
     }
 
-    private static Employee[] getEmployeeArray() {
+    private static Employee[] getEmployeeArray() throws IOException {
         List<Employee> empList = GetData.getListWithDuplicateRecords();        // Get List
         Employee[] empArray = new Employee[empList.size()];
         empArray = empList.toArray(empArray);
         return empArray;
     }
 
-    private static Set<Employee> getEmployeSet() {
+    private static Set<Employee> getEmployeSet() throws IOException {
         Employee[] empArray = getEmployeeArray();
         Set<Employee> empSet = new HashSet<>(Arrays.asList(empArray));
         return empSet;
     }
 
-    private static Map<Integer, Employee> getEmployeeMap() {
+    private static Map<Integer, Employee> getEmployeeMap() throws IOException {
         final Employee[] empArr = getEmployeeArray();
         Map<Integer,Employee> employeMap = IntStream.range(0, empArr.length-1).boxed()
                 .collect(Collectors.toMap(i -> empArr[i].getEmpId() , i-> empArr[i], (oldValue,newValue)->newValue));
         return employeMap;
     }
 
-    private static void mapPractice() {
+    private static void mapPractice() throws IOException {
 
         Map<Integer,Employee> mapEmployee = getEmployeeMap();
         //convert map to Arrays
@@ -130,7 +131,7 @@ public class SummaryCollection {
         System.out.println("List Size from Map is : :"+empList.size());
         }
 
-    private static void mapIterate() {
+    private static void mapIterate() throws IOException {
         Map<Integer,Employee> mapEmployee = getEmployeeMap();
         //Using for each
         mapEmployee.forEach((id, name) -> {

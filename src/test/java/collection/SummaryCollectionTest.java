@@ -4,6 +4,7 @@ import data.Employee;
 import data.GetData;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SummaryCollectionTest {
 
     @Test
-    public void testMap() {
+    public void testMap() throws IOException {
         var noRecords = Records.personfewrecords;
         //List<Employee> empList = GetData.getRecords(noRecords.toString());
         Map<Integer,Employee> empMap = GetData.getEmployeeMap();

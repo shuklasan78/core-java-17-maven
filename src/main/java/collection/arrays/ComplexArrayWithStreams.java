@@ -82,7 +82,7 @@ public class ComplexArrayWithStreams {
     }
     private static Employee[] getEmployeeArray() {
         long start = System.currentTimeMillis();
-        List<Employee> empList = GetData.getListWithOneMillionRecords();
+        List<Employee> empList = GetData.getListWithOneMRecords();
         long finish = System.currentTimeMillis();
         //log.info("Load `time for EmpList :"+Long.valueOf(finish-start).toString());
         Employee[] emp = new Employee[empList.size()];

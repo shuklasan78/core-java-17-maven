@@ -1,9 +1,10 @@
 package basics;
 
+import data.CSVDataProcessor;
 import data.Employee;
 import data.GetData;
-import data.ProcessRecords;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
@@ -13,7 +14,7 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class StreamsBasic {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         StreamsBasic o1 = new StreamsBasic();
         //o1.convertListToSet();
         //listToMap();
@@ -23,12 +24,8 @@ public class StreamsBasic {
         QueryValuesFromList();
     }
 
-    private static void callTwoConstructorsOnly() {
-        List<Person> persons = ProcessRecords.getPerson();
-        //List<Person> newList = persons.stream().map(Person::new).limit(2).collect(Collectors.toList());
-    }
 
-    private void  convertListToSet() {
+    private void  convertListToSet() throws IOException {
         List<Employee> employeeList = GetData.getListWithfewRecords();
         System.out.println("ORIGINAL LIST SIZE :"+employeeList.size());
         Set<Integer> salarySet = new HashSet<>();
@@ -48,7 +45,7 @@ public class StreamsBasic {
         System.out.println("noDuplicateList :"+noDuplicateList);
     }
 
-    private static Map<Integer, Employee> listToMap() {
+    private static Map<Integer, Employee> listToMap() throws IOException {
         List<Employee> employeeList = GetData.getListWithfewRecords();
 
         Map<Integer, Employee> listEmployee  = employeeList.stream()
@@ -57,7 +54,7 @@ public class StreamsBasic {
         return listEmployee;
     }
 
-    private static void calculateMaxMinSumFromList() {
+    private static void calculateMaxMinSumFromList() throws IOException {
         List<Employee> employeeList = GetData.getListWithfewRecords();
         IntSummaryStatistics stats = employeeList.stream().mapToInt((x)->x.getSalary()).summaryStatistics();
         System.out.println("The total value of salary is :"+stats.getSum());
@@ -65,7 +62,7 @@ public class StreamsBasic {
 
     }
 
-    private static void sortBasdOnAgeOnList() {
+    private static void sortBasdOnAgeOnList() throws IOException {
 
         List<Employee> employeeList = GetData.getListWithfewRecords().stream().sorted(Comparator.comparingDouble(Employee::getAgeInYrs)).collect(Collectors.toList());
         employeeList.forEach(p-> System.out.println("Name  :"+p.getFirstname()+"              AgeinYears     :"+p.getAgeInYrs()));
@@ -84,7 +81,7 @@ public class StreamsBasic {
 
     }
 
-    private static void getMapToList() {
+    private static void getMapToList() throws IOException {
         Map<Integer, Employee> employeeMap = listToMap();
         List<Integer> arrlist = employeeMap.keySet()
                 .stream()
@@ -101,7 +98,7 @@ public class StreamsBasic {
 
     }
 
-    private static void QueryValuesFromList() {
+    private static void QueryValuesFromList() throws IOException {
         List<Employee> employeeList = GetData.getListWithfewRecords();
         Map<String, Long> noOfMaleAndFemaleEmployees=
                 employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));

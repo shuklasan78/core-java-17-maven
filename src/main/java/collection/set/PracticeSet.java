@@ -16,7 +16,7 @@ public class PracticeSet {
     }
 
     private static Set<Integer> getSetEmpId() {
-        List<Employee> empList = GetData.getListWithTwoMillionRecords().stream().collect(Collectors.toList());
+        List<Employee> empList = GetData.getListWithOneMRecords().stream().collect(Collectors.toList());
 
         System.out.println("Size of the List :"+empList.size());
         List<Integer> empIdList = new ArrayList<>();

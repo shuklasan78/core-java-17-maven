@@ -1,9 +1,9 @@
 package collection.map;
 
 import basics.Person;
+import data.CSVDataProcessor;
 import data.Employee;
 import data.GetData;
-import data.ProcessRecords;
 
 import java.util.*;
 import java.util.function.Function;
@@ -15,38 +15,9 @@ public class PracticeMap {
         //getMapEmployeeWithDuplicateKeyException();
         getComvertedMapFromListWithDuplicateRecords();
     }
-    //Get the list of persons and store in Map with age as key and names as list.
-    private static Map<Integer, List<Person>> getPersonMap() {
-        List<Person> personsList = ProcessRecords.getPerson();
-        Map<Integer, List<Person>> personsByAge = personsList
-                .stream().filter(p->p.getAge()==20)
-                .collect(Collectors.groupingBy(p -> p.getAge()));
-
-        return personsByAge;
-    }
-    private static void getBasicMapConcept() {
-        //System.out.println("List converted o map :"+getPersonMap());
-        Set<Map.Entry<Integer, List<Person>>> entries = getPersonMap().entrySet();
-        //System.out.println("Entries from Map :"+entries);
-        Set<Integer> keySet = getPersonMap().keySet();
-        //System.out.println("Keyset from Map :"+keySet);
-        Collection<List<Person>> mapValues = getPersonMap().values();
-        // Collection contains the list of items which can be iterated with for and forEach.
-        for(List<Person> pers : mapValues) {
-            pers.forEach(p-> System.out.println(p.getName()));
-        }
-        //System.out.println("The values of map are "+mapValues);
-        Optional<List<Person>> userName = getPersonMap().entrySet()
-                .stream()
-                .filter(user -> user.getKey().equals("20"))
-                .map(Map.Entry::getValue)
-                .findFirst();
-
-        System.out.println(userName.get());
-    }
 
     private static Map<Integer, Employee> getMapEmployeeWithDuplicateKeyException() {
-        List<Employee> empList = GetData.getListWith50KRecords();
+        List<Employee> empList = GetData.getListWithOneMRecords();
         System.out.println("The size of the list is :"+empList.size());
         //Java 8 using Lambdas
         Map<Integer, Employee> empMap =  empList.stream().collect(Collectors.toMap(Employee -> Employee.getEmpId(), Employee->Employee));

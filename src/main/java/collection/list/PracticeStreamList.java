@@ -1,7 +1,8 @@
 package collection.list;
 import basics.Person;
+import data.CSVDataProcessor;
 import data.Employee;
-import data.ProcessRecords;
+import data.GetData;
 import lombok.val;
 
 import java.util.*;
@@ -55,22 +56,16 @@ public class PracticeStreamList {
                     return s.toUpperCase();
                 })
                 .forEach(s -> System.out.println("forEach: " + s));
-        List<Person> personsList = ProcessRecords.getPerson();
 
-        Map<Integer, List<Person>> personsByAge = personsList
-                .stream().filter(p->p.getAge()<20)
-                .collect(Collectors.groupingBy(p -> p.getAge()));
+
 
 
     }
 
-    private static void practicePeron() {
-        System.out.println("The values are :"+ProcessRecords.getPerson().stream().filter(p->p.getAge()==56).collect(Collectors.toSet()));
-    }
+
     private static void practiceMillionRecords() {
-        ProcessRecords o1 = new ProcessRecords();
         Set<Employee> empIdOddSet = new HashSet<>();
-        List<Employee> empList = o1.readEmployeesFromCSV("twomillion");
+        List<Employee> empList = GetData.getListWithOneMRecords();
         for(Employee empId : empList) {
             if(empId.getEmpId()!=null)
             {
