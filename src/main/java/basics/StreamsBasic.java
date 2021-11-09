@@ -1,12 +1,10 @@
 package basics;
 
-import data.CSVDataProcessor;
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,7 +24,7 @@ public class StreamsBasic {
 
 
     private void  convertListToSet() throws IOException {
-        List<Employee> employeeList = GetData.getListWithfewRecords();
+        List<Employee> employeeList = GetEmployeeData.getEmployeeListWithfewRecords();
         System.out.println("ORIGINAL LIST SIZE :"+employeeList.size());
         Set<Integer> salarySet = new HashSet<>();
         employeeList.stream().forEach(p->salarySet.add(p.getSalary()));
@@ -46,7 +44,7 @@ public class StreamsBasic {
     }
 
     private static Map<Integer, Employee> listToMap() throws IOException {
-        List<Employee> employeeList = GetData.getListWithfewRecords();
+        List<Employee> employeeList = GetEmployeeData.getEmployeeListWithfewRecords();
 
         Map<Integer, Employee> listEmployee  = employeeList.stream()
                 .collect(Collectors.toMap(Employee::getEmpId, Function.identity()));
@@ -55,7 +53,7 @@ public class StreamsBasic {
     }
 
     private static void calculateMaxMinSumFromList() throws IOException {
-        List<Employee> employeeList = GetData.getListWithfewRecords();
+        List<Employee> employeeList = GetEmployeeData.getEmployeeListWithfewRecords();
         IntSummaryStatistics stats = employeeList.stream().mapToInt((x)->x.getSalary()).summaryStatistics();
         System.out.println("The total value of salary is :"+stats.getSum());
         System.out.println("Maximum salary :"+stats.getMax() +"   Minimum Salary :"+stats.getMin());
@@ -64,10 +62,10 @@ public class StreamsBasic {
 
     private static void sortBasdOnAgeOnList() throws IOException {
 
-        List<Employee> employeeList = GetData.getListWithfewRecords().stream().sorted(Comparator.comparingDouble(Employee::getAgeInYrs)).collect(Collectors.toList());
+        List<Employee> employeeList = GetEmployeeData.getEmployeeListWithfewRecords().stream().sorted(Comparator.comparingDouble(Employee::getAgeInYrs)).collect(Collectors.toList());
         employeeList.forEach(p-> System.out.println("Name  :"+p.getFirstname()+"              AgeinYears     :"+p.getAgeInYrs()));
 
-        List<Employee> employeeList2 = GetData.getListWithfewRecords();
+        List<Employee> employeeList2 = GetEmployeeData.getEmployeeListWithfewRecords();
         List<Employee> sortedList = employeeList2.stream()
                 .sorted((o1, o2) -> {
                     if(o1.getAgeInYrs() == o2.getAgeInYrs())
@@ -99,7 +97,7 @@ public class StreamsBasic {
     }
 
     private static void QueryValuesFromList() throws IOException {
-        List<Employee> employeeList = GetData.getListWithfewRecords();
+        List<Employee> employeeList = GetEmployeeData.getEmployeeListWithfewRecords();
         Map<String, Long> noOfMaleAndFemaleEmployees=
                 employeeList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
         System.out.println(noOfMaleAndFemaleEmployees);

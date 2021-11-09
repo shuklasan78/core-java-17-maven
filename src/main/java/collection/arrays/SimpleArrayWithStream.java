@@ -1,7 +1,7 @@
 package collection.arrays;
 
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 
 import java.io.IOException;
 import java.util.*;
@@ -39,7 +39,7 @@ public class SimpleArrayWithStream {
 
     private static Employee[] listConvertToArrays() throws IOException {
         Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
-        List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
+        List<Employee> lstEmp = GetEmployeeData.getEmployeeListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
         for(Employee emp : lstEmp) {
             //System.out.println("Sorting List Differently :"+emp.getEmpId());
         }
@@ -55,7 +55,7 @@ public class SimpleArrayWithStream {
     }
 
     private static Map<Integer, Employee> arraysConvertedToMap() throws IOException {
-        List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(Comparator.comparingInt(Employee::getEmpId)).collect(Collectors.toList());
+        List<Employee> lstEmp = GetEmployeeData.getEmployeeListWithfewRecords().stream().sorted(Comparator.comparingInt(Employee::getEmpId)).collect(Collectors.toList());
         final Employee[] empArrayValues = listConvertToArrays();
         Integer[] keys = lstEmp.stream().map(Employee::getEmpId).toArray(Integer[]::new);
         System.out.println("empArrayValues   :"+empArrayValues.length+"    keys   :"+keys.length);
@@ -76,7 +76,7 @@ public class SimpleArrayWithStream {
     private static void sortArraysDifferently() throws IOException {
 
         Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
-        List<Employee> lstEmp = GetData.getListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
+        List<Employee> lstEmp = GetEmployeeData.getEmployeeListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
         Employee[] empArray = new Employee[lstEmp.size()];
         empArray = lstEmp.toArray(empArray);
         Arrays.sort(empArray, Comparator.comparing(Employee::getEmpId));  // two ways to comparing

@@ -1,7 +1,7 @@
 package collection;
 
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 
 import java.io.IOException;
 import java.util.*;
@@ -21,7 +21,7 @@ public class SummaryCollection {
     }
 
     private static void practiceArrayCollection() throws IOException {
-        List<Employee> empList = GetData.getListWithfewRecords();        // Get List
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithfewRecords();        // Get List
         Employee[] empArray = new Employee[empList.size()];
         empArray = empList.toArray(empArray);                                   // Convert List into Arrays
         Set<Employee> empSet = Set.of(empArray);                                // convert Arrays to Set
@@ -38,7 +38,7 @@ public class SummaryCollection {
         Comparator<Employee> sorterName = (a,b) -> a.getFirstname().compareTo(b.getFirstname());
         Comparator<Employee> sorter1 = Comparator.comparingInt(Employee::getEmpId);
 
-        List<Employee> empList = GetData.getListWithOneMRecords();        // Get List
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithOneMRecords();        // Get List
         Employee[] empArray = new Employee[empList.size()];
         Arrays.sort(empArray,sorter);   // First way
         Arrays.sort(empArray,Comparator.comparing(Employee::getEmpId)); //Second Way
@@ -74,7 +74,7 @@ public class SummaryCollection {
         Comparator<Employee> empSorterOtherWayEmpId = Comparator.comparing(Employee::getEmpId);
         Comparator<Employee> empSorterOtherWayFirstNam = Comparator.comparing(Employee::getFirstname);
 
-        List<Employee> empList = GetData.getListWithfewRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithfewRecords();
         //simple sorting
         empList = empList.stream().sorted(empSorterEmpId).toList();
         empList.forEach(p-> System.out.println("EmpId "+p.getEmpId()));
@@ -87,7 +87,7 @@ public class SummaryCollection {
     }
 
     private static Employee[] getEmployeeArray() throws IOException {
-        List<Employee> empList = GetData.getListWithDuplicateRecords();        // Get List
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithDuplicateRecords();        // Get List
         Employee[] empArray = new Employee[empList.size()];
         empArray = empList.toArray(empArray);
         return empArray;

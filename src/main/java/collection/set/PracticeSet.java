@@ -1,6 +1,6 @@
 package collection.set;
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,7 +16,7 @@ public class PracticeSet {
     }
 
     private static Set<Integer> getSetEmpId() {
-        List<Employee> empList = GetData.getListWithOneMRecords().stream().collect(Collectors.toList());
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithOneMRecords().stream().collect(Collectors.toList());
 
         System.out.println("Size of the List :"+empList.size());
         List<Integer> empIdList = new ArrayList<>();
@@ -43,7 +43,7 @@ public class PracticeSet {
 
     private static Set<Employee> getOnlyDistinctDataSet() {
 
-        List<Employee> empList = GetData.getListWithfewRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithfewRecords();
         System.out.println("empList :"+empList.size());
         //Set<Employee> empSet = empList.stream().collect(Collectors.toSet(Employee::getEmpId, c -> c, (c1, c2) -> c1));
         Set<Employee> empSet = empList.stream().collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(Employee::getEmpId))));
@@ -53,7 +53,7 @@ public class PracticeSet {
     }
 
     private static Set<Employee> getUniquedElementInMapFromList() {
-        List<Employee> empList = GetData.getListWithfewRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithfewRecords();
         List<Employee> uniqueEmployee = empList.stream()
                 .distinct()               // it will remove duplicate object, It will check duplicate using equals method
                 .collect(Collectors.toList());

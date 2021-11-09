@@ -1,13 +1,12 @@
 package collection.arrays;
 
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 import lombok.extern.slf4j.Slf4j;
 import sorting.ImplementMergeSort;
 import sorting.Quick;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class ComplexArrayWithStreams {
@@ -82,7 +81,7 @@ public class ComplexArrayWithStreams {
     }
     private static Employee[] getEmployeeArray() {
         long start = System.currentTimeMillis();
-        List<Employee> empList = GetData.getListWithOneMRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithOneMRecords();
         long finish = System.currentTimeMillis();
         //log.info("Load `time for EmpList :"+Long.valueOf(finish-start).toString());
         Employee[] emp = new Employee[empList.size()];

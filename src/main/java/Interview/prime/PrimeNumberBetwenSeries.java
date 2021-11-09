@@ -1,7 +1,7 @@
 package Interview.prime;
 
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,7 +49,7 @@ public class PrimeNumberBetwenSeries {
                 return true;
     }
     private static HashMap<String, List<Integer>> getEvenOddPrime() {
-        List<Employee> employeeList = GetData.getListWithfewRecords();
+        List<Employee> employeeList = GetEmployeeData.getEmployeeListWithfewRecords();
         List<Integer> allDataList = employeeList.stream().map(Employee::getEmpId).collect(Collectors.toList());
         List<Integer> evenList = new ArrayList<>();
         List<Integer> oddList = new ArrayList<>();

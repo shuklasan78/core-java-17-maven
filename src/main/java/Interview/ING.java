@@ -1,7 +1,7 @@
 package Interview;
 
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -69,7 +69,7 @@ public class ING {
     }
 
     private static void printEvenAndOddFromArray() {
-        List<Employee> emplList = GetData.getListWithfewRecords();
+        List<Employee> emplList = GetEmployeeData.getEmployeeListWithfewRecords();
         Employee[] empArr = new Employee[emplList.size()];
         empArr = emplList.toArray(empArr);
         System.out.println("The size of the Array :"+empArr.length);

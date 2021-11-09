@@ -1,9 +1,7 @@
 package collection.map;
 
-import basics.Person;
-import data.CSVDataProcessor;
 import data.Employee;
-import data.GetData;
+import data.GetEmployeeData;
 
 import java.util.*;
 import java.util.function.Function;
@@ -17,7 +15,7 @@ public class PracticeMap {
     }
 
     private static Map<Integer, Employee> getMapEmployeeWithDuplicateKeyException() {
-        List<Employee> empList = GetData.getListWithOneMRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithOneMRecords();
         System.out.println("The size of the list is :"+empList.size());
         //Java 8 using Lambdas
         Map<Integer, Employee> empMap =  empList.stream().collect(Collectors.toMap(Employee -> Employee.getEmpId(), Employee->Employee));
@@ -30,7 +28,7 @@ public class PracticeMap {
     }
 
     private static Map<Integer, Employee> getComvertedMapFromListWithDuplicateRecords() {
-        List<Employee> empList = GetData.getListWithfewRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithfewRecords();
         //TODO
         //Map<Integer, Employee> myMap =  empList.stream().collect(Collectors.toMap(Function.identity(), String::length, (e1, e2) -> e1));
         Map<Integer, Employee> result1 = empList.stream()

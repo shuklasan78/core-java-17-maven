@@ -1,12 +1,8 @@
 package collection.list;
-import basics.Person;
-import data.CSVDataProcessor;
 import data.Employee;
-import data.GetData;
-import lombok.val;
+import data.GetEmployeeData;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -65,7 +61,7 @@ public class PracticeStreamList {
 
     private static void practiceMillionRecords() {
         Set<Employee> empIdOddSet = new HashSet<>();
-        List<Employee> empList = GetData.getListWithOneMRecords();
+        List<Employee> empList = GetEmployeeData.getEmployeeListWithOneMRecords();
         for(Employee empId : empList) {
             if(empId.getEmpId()!=null)
             {
