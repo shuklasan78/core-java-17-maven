@@ -1,5 +1,6 @@
 package data;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,17 +8,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ProcessSalesRecords {
-    public static void main(String[] args) {
-        ProcessSalesRecords o1 = new ProcessSalesRecords();
+    static String filePathMillion = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/SalesRecords5M.csv";
+    static String filePathThousand = "/Users/sandeepkumarshukla/Applications/Technical/core-java-17-maven/src/main/resources/SalesRecords1000.csv";
 
-        System.out.println(readSalesDataFromCSV("").size());
+    public static void main(String[] args) throws IOException {
+
+        System.out.println(readDataFromCSV(filePathMillion).size());
     }
 
-   public static List<SalesVO> readDataFromCSV() throws IOException {
+   public static List<SalesVO> readDataFromCSV(String filePath ) throws IOException {
         List<SalesVO> inputList = new ArrayList<SalesVO>();
-        String filePath = "D://sshukla//technical//corejava//src//com//streams//data//SalesRecord100.csv";
         //var filePath = System.getProperty("user.dir") + "/resources/SalesRecord100.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             inputList = br.lines().skip(1).map(mapToItem).collect(Collectors.toList());

@@ -2,6 +2,7 @@ package data;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,8 +44,8 @@ public class GetData {
         return originalList;
     }
 
-    public static List<SalesData> getFiveMillionSalesRecord() {
-        List<SalesData> originalList = ProcessSalesRecords.readSalesDataFromCSV("salesfivemillionssalesrecords");
+    public static List<SalesVO> getFiveMillionSalesRecord() throws IOException {
+        List<SalesVO> originalList = ProcessSalesRecords.readDataFromCSV(ProcessSalesRecords.filePathMillion);
         return originalList;
     }
 
