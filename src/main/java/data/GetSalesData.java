@@ -1,13 +1,21 @@
 package data;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
+@Slf4j
 public class GetSalesData {
 
     public static void main(String[] args) {
-        System.out.println("Size  :"+getSalesSet("1K").size());
+        log.info("5M records :"+getSalesRecord5M().size());
+        log.info("2M records :"+getSalesRecord2M().size());
+        log.info("iK records :"+getSalesRecord1K().size());
+        log.info("Generick records :"+getSalesRecord(FilesEnum.SalesRecords1000.toString()).size());
+
+        log.info("Arrays records :"+getSalesArray(FilesEnum.SalesRecords1000.toString()).length);
+
     }
 
     public static List<SalesVO> getSalesRecord5M(){
@@ -25,15 +33,14 @@ public class GetSalesData {
         return originalList;
     }
 
+    public static List<SalesVO> getSalesRecord(String records){
+        List<SalesVO> originalList = CSVDataProcessor.readSalesCSVFile(records.toString());
+        return originalList;
+    }
+
     private static List<SalesVO> getSalesVOList(String records) {
-        List<SalesVO> salesList = null;
-        if(records.equals("1K")) {
-            salesList = getSalesRecord1K();
-        } else if(records.equals("2M")) {
-            salesList = getSalesRecord2M();
-        } else if (records.equals("5M")) {
-            salesList = getSalesRecord5M();
-        }
+        List<SalesVO> salesList = new ArrayList<>();
+        salesList = getSalesRecord(records);
         return salesList;
     }
 

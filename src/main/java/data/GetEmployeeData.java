@@ -11,8 +11,7 @@ public class GetEmployeeData {
 
     public static void main(String[] args){
 
-        log.info("Size of the list getListWithfewRecords is :"+ getEmployeeListWithfewRecords().size());
-        log.info("Size of the list getListWith50KRecords is :"+ getEmployeeListWithOneMRecords().size());
+        log.info("Size of the list getListWith50KRecords is :"+ getEmployeeList(FilesEnum.EmployeeRecords1M.toString()).size());
 
     }
 
@@ -36,15 +35,20 @@ public class GetEmployeeData {
         return originalList;
     }
 
+    public static List<Employee> getEmployeeList(String records){
+        List<Employee> originalList = CSVDataProcessor.readEmployeesCSVFile(records);
+        return originalList;
+    }
+
     private static List<Employee> getSalesVOList(String records) {
         List<Employee> empList = null;
-        if(records.equals("few")) {
+        if(records.equals(FilesEnum.EmployeeFewRecords.toString())) {
             empList = getEmployeeListWithfewRecords();
-        } else if(records.equals("duplicate")) {
+        } else if(records.equals(FilesEnum.EmployeeDuplicateRecords.toString())) {
             empList = getEmployeeListWithDuplicateRecords();
-        } else if (records.equals("1M")) {
+        } else if (records.equals(FilesEnum.EmployeeRecords1M.toString())) {
             empList = getEmployeeListWithOneMRecords();
-        } else if (records.equals("2M")) {
+        } else if (records.equals(FilesEnum.EmployeeRecords2M.toString())) {
             empList = getEmployeeListWithTwoMRecords();
         }
         return empList;
