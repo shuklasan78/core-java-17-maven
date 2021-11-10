@@ -15,7 +15,8 @@ public class ArraysAdvancedStream {
 
     public static void main(String[] args) {
         //convertArraysToCollections();
-        removeDuplicatesFromArrays();
+        //removeDuplicatesFromArrays();
+        sortingArrays();
     }
 
     private static void convertArraysToCollections() {
@@ -41,51 +42,110 @@ public class ArraysAdvancedStream {
     }
 
     private static void sortingArrays() {
+        SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords5M.toString());
+        sortArrays(salesArr);
+    }
+
+    private static void sortArrays(SalesVO[] salesArr) {
+        long start = new Date().getTime();
+        Arrays.sort(salesArr, Comparator.comparing(SalesVO::getOrderID));
+        Arrays.sort(salesArr, Comparator.comparing(p -> p.getOrderID()));
+
+        long end = new Date().getTime();
+        log.info("Time taken :" +(end-start));
+        for(SalesVO intg : salesArr) {
+            //log.info("Order Id "+intg.getOrderID() +"  Country   :"+intg.getCountry());
+        }
 
     }
 
+    //Using Hashmap gives best result in removing duplicate from array for 2M records
     private static void removeDuplicatesFromArrays() {
-        SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords100Duplicate.toString());
-        log.info("Total Arrays number:"+salesArr.length);
+        SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords2M.toString());
+        log.info("Total Number of Records Including Duplicates :"+salesArr.length);
+        getDistinctArray(salesArr);
+        removeDuplicateFromArrayByPlacingInSet(salesArr);   // best performance
+        getDistinctElementfromArrayAndStoreInMap(salesArr);
+        extractDuplicateRecordsFromArrayInSet(salesArr);
+
+    }
+
+    private static SalesVO[] getDistinctArray( SalesVO[] salesArr) {
+        long start = new Date().getTime();
         SalesVO[] salesArrDistinct =  Arrays.stream(salesArr).distinct().toArray(SalesVO[]::new);
-        log.info("Total distinct Arrays :"+salesArrDistinct.length);
+        long end = new Date().getTime();
+        log.info("Time Taken to Process distinct Logic In Array :"+String.valueOf(end-start));
+        log.info("Total records in distinctArray :"+salesArrDistinct.length);
 
+        return salesArrDistinct;
+    }
 
-        // Extract Duplicate duplicate from Array and store them in Set
+    private static Set<SalesVO> extractDuplicateRecordsFromArrayInSet( SalesVO[] salesArr) {
+        long start = new Date().getTime();
         Set<SalesVO> duplicateSet = Arrays.stream(salesArr)
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
                 .entrySet().stream()
                 .filter(m -> m.getValue()>1)
                 .map((Map.Entry::getKey))
                 .collect(Collectors.toSet());
-        System.out.println("Duplicate Set :"+duplicateSet.size());
-        for (SalesVO salesVO : duplicateSet) {
-            log.info("Duplicate Id's are :"+salesVO.getOrderID());
-        }
-        //Extract to Set using list
-        duplicateSet = Arrays.asList(salesArr)
-                .stream().filter(i -> Collections.frequency(Arrays.stream(salesArr).toList(),1)>1).collect(Collectors.toSet());
+        long end = new Date().getTime();
+        log.info("Time taken for extractDuplicateRecordsFromArrayInSet:"+String.valueOf(end-start));
+        log.info("Total Number of Duplicate recodrs in Set are : :"+duplicateSet.size());
 
+        return duplicateSet;
+    }
 
-        //Best solution to get the duplicate from arrays
-        Map<Integer, Integer> duplicateValueMap = new HashMap<>();
+    private static void getDistinctElementfromArrayAndStoreInMap( SalesVO[] salesArr) {
+        long start = new Date().getTime();
+        Map<SalesVO, Integer> duplicateValueMap = new HashMap<>();
         for(SalesVO salesVO : salesArr) {
             Integer count = duplicateValueMap.get(salesVO.getOrderID());
             if( count == null) {
-                duplicateValueMap.put(salesVO.getOrderID(),1);
+                duplicateValueMap.put(salesVO,1);
             } else {
-                duplicateValueMap.put(salesVO.getOrderID(), ++count);
+                duplicateValueMap.put(salesVO, ++count);
             }
         }
         //print duplicate values
-        Set<Map.Entry<Integer,Integer>>  setEntry = duplicateValueMap.entrySet();
-        for(Map.Entry<Integer,Integer> ent : setEntry) {
+        Set<Map.Entry<SalesVO,Integer>>  setEntry = duplicateValueMap.entrySet();
+        for(Map.Entry<SalesVO,Integer> ent : setEntry) {
             if(ent.getValue()>1) {
-                log.info("Duplicate ID are :"+ent.getKey()+"  Name  :"+ent.getKey()+"   Value  :"+ent.getValue());
+                //log.info("Duplicate ID are :"+ent.getKey()+"  Name  :"+ent.getKey()+"   Value  :"+ent.getValue());
             }
         }
+        long end = new Date().getTime();
+        log.info("Time Taken to Process records from removing duplicate from array and placing in Map :"+String.valueOf(end-start));
+        log.info("Total records in Map After removing duplicate from Array :"+duplicateValueMap.size());
+
     }
 
+    private static void removeDuplicateFromArrayByPlacingInSet(SalesVO[] sales) {
+        long start = new Date().getTime();
+        Set<SalesVO> nonDuplicateSet = Arrays.stream(sales).collect(Collectors.toSet());
+        long end = new Date().getTime();
+        log.info("Time Taken to Process records from removing duplicate from array and placing in Set :"+String.valueOf(end-start));
+        log.info("nonDuplicateSet has records :"+nonDuplicateSet.size());
 
+    }
 
+    private static void addElementToArray(SalesVO[] sales) {
+        SalesVO item = new SalesVO();
+        item.setRegion("UP");
+        item.setCountry("India");
+        item.setItemType("Cosmetics");
+        item.setSalesChannel("Online");
+        item.setOrderPriority("H");
+        item.setOrderDate("7/20/2021");
+        item.setOrderID(660993374);
+        item.setShipDate("7/20/2020");
+        item.setUnitsSold(9654);
+        item.setUnitPrice(437.20);
+        item.setUnitCost(263.33);
+        item.setTotalRevenue(4220728.80);
+        item.setTotalCost(2542187.82);
+        item.setTotalProfit(1678540.98);
+        long start = new Date().getTime();
+        SalesVO[] addSalesDataArr = {item};
+        long end = new Date().getTime();
+    }
 }

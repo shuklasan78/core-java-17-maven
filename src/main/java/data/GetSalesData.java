@@ -78,4 +78,45 @@ public class GetSalesData {
         salesSet = salesList.stream().collect(Collectors.toSet());
         return salesSet;
     }
+
+    public static Map<Integer, Double> getSalesRevenueMap(String records) {
+        Map<Integer, Double> salesRevenue =  new HashMap<>();
+        List<SalesVO> salesVO = getSalesRecord(records);
+        salesRevenue = salesVO.stream().collect(Collectors.toMap(SalesVO::getOrderID,SalesVO::getTotalRevenue , (n,o) ->n));
+        salesRevenue = salesVO.stream().collect(Collectors.toMap(p -> p.getOrderID(),p -> p.getTotalRevenue() , (n,o) ->n));
+        salesRevenue = salesVO.stream().collect(Collectors.toMap(p -> p.getOrderID(),SalesVO::getTotalRevenue , (n,o) ->n));
+        return salesRevenue;
+    }
+
+    public static Set<Integer> getSalesOrderIdSet (String records) {
+        Set<Integer> orderIdSet =  new HashSet<>();
+        List<SalesVO> salesList = getSalesVOList(records);
+        orderIdSet = salesList.stream().map(p->p.getOrderID()).collect(Collectors.toSet());
+        return orderIdSet;
+    }
+
+    public static List<Double> getRevenueList(String records) {
+        List<SalesVO> salesList = getSalesVOList(records);
+        List<Double> revenueList = salesList.stream().map(p -> p.getTotalRevenue()).collect(Collectors.toList());
+        return revenueList;
+    }
+
+    public static List<Double> getUnitPriceList(String records) {
+        List<SalesVO> salesList = getSalesVOList(records);
+        List<Double> revenueList = salesList.stream().map(p -> p.getUnitPrice()).collect(Collectors.toList());
+        return revenueList;
+    }
+
+    public static List<Double> getUnitCostList(String records) {
+        List<SalesVO> salesList = getSalesVOList(records);
+        List<Double> unitCostList = salesList.stream().map(p -> p.getUnitCost()).collect(Collectors.toList());
+        return unitCostList;
+    }
+
+    public static List<String> getCountryList(String records) {
+        List<SalesVO> salesList = getSalesVOList(records);
+        List<String> revenueList = salesList.stream().map(p -> p.getCountry()).collect(Collectors.toList());
+        return revenueList;
+    }
+
 }
