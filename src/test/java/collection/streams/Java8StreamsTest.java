@@ -1,5 +1,6 @@
 package collection.streams;
 
+import collection.service.Car;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

@@ -11,6 +11,7 @@ public enum FilesEnum {
     SalesRecords5M,
     SalesRecords1000,
     SalesRecords100Duplicate,
-    SalesRecords100
-
+    SalesRecords100,
+    SalesRecordsBasic1,
+    SalesRecordsBasic2
 }

@@ -1,4 +1,4 @@
-package collection.streams;
+package collection.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
