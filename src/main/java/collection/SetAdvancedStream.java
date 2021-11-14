@@ -4,8 +4,6 @@ import data.FilesEnum;
 import data.GetSalesData;
 import data.SalesVO;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,16 +14,39 @@ public class SetAdvancedStream  {
     public static void main(String[] args) {
         String records = FilesEnum.SalesRecords2M.toString();
         //convertSetToCllections(records);
-        sortSet(records);   //collection.sort is giving better performnce.
-        removeDuplicateFromSet(records);
-        mergeSet(records);
-        searchInSet(records);
+        //Very important Comparator is implemented.
+        //sortSet(records);   //collection.sort is giving better performnce.
+        //removeDuplicateFromSet(records);   // does not qualify
+        //mergeSet(records);
+        //searchInSet(records);   /// Still could not be achieved
     }
 
     private static void searchInSet(String records) {
+        Set<SalesVO> salesVOSet1 = GetSalesData.getSalesSet(records);
+        SalesVO salesObj = new SalesVO();
+        salesObj.setRegion("Central America and the Caribbean");
+        salesObj.setCountry("Saint Kitts and Nevis");
+        salesObj.setItemType("Office Supplies");
+        salesObj.setSalesChannel("Online");
+        salesObj.setOrderPriority("M");
+        salesObj.setOrderDate("5/14/2013");
+        salesObj.setOrderID(779597842);
+        salesObj.setShipDate("5/14/2013");
+        salesObj.setUnitsSold(9181);
+        salesObj.setUnitPrice(651.21);
+        salesObj.setUnitCost(524.96);
+        salesObj.setTotalRevenue(5978759.0);
+        salesObj.setTotalCost(4819657.76);
+        salesObj.setTotalProfit(1159101.25);
         long start = new Date().getTime();
+        boolean result = salesVOSet1.contains(salesObj);
+        if(result) {
+            log.info("The result is available in Set:");
+        }
         long end = new Date().getTime();
+
         long difference = end - start ;
+        log.info("The `time Taken to find element in Set :"+difference);
 
         start = new Date().getTime();
         end = new Date().getTime();
@@ -33,24 +54,34 @@ public class SetAdvancedStream  {
     }
 
     private static void mergeSet(String records) {
+        // add is giving better performance than stream.
+        Set<SalesVO> salesVOSet1 = GetSalesData.getSalesSet(records);
+        records = FilesEnum.SalesRecords5M.toString();
+        Set<SalesVO> salesVOSet2 = GetSalesData.getSalesSet(records);
         long start = new Date().getTime();
+        Set<SalesVO> salesVOMergedSet = new HashSet<>();
+        salesVOMergedSet.addAll(salesVOSet1);
+        salesVOMergedSet.addAll(salesVOSet2);
         long end = new Date().getTime();
         long difference = end - start ;
-
-
+        log.info("time Taken to Merge :"+difference+"  Merged Set Size is   :"+salesVOMergedSet.size());
+        salesVOSet1.clear();
+        salesVOSet2.clear();
+        //Always fails when i used Stream
+        Set<SalesVO> salesVOSet3 = GetSalesData.getSalesSet(records);
+        records = FilesEnum.SalesRecords5M.toString();
+        Set<SalesVO> salesVOSet4 = GetSalesData.getSalesSet(records);
         start = new Date().getTime();
+        salesVOMergedSet = Stream.of(salesVOSet1, salesVOSet2)
+                .flatMap(x -> x.stream())
+                .collect(Collectors.toSet());
         end = new Date().getTime();
-        difference = end - start ;
-    }
+        log.info("time Taken to Merge Set :"+difference+"  Merged Set Size is   :"+salesVOMergedSet.size());
+        salesVOSet3.clear();
+        salesVOSet4.clear();
+        salesVOMergedSet.clear();
 
-    private static void removeDuplicateFromSet(String records) {
-        long start = new Date().getTime();
-        long end = new Date().getTime();
-        long difference = end - start ;
 
-        start = new Date().getTime();
-        end = new Date().getTime();
-        difference = end - start ;
     }
 
     private static void sortSet(String records) {
