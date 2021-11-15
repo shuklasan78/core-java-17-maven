@@ -5,8 +5,8 @@ public class MultiDimensionalArrays {
     public static void main(String[] args) {
 
         //loopTwoDimentionalArray();
-        //loopThreeDimensionalArray();
-        loopThreeDimensionalArray2();
+        loopThreeDimensionalArray();
+        //loopThreeDimensionalArray2();
     }
 
     private static void loopThreeDimensionalArray2() {
@@ -25,7 +25,7 @@ public class MultiDimensionalArrays {
         for(int i=0; i<=0; i++){
             for(int j=0; j<=0; j++){
                 for(int k=0; k<=2; k++){
-                    System.out.println(arr[i][j][k]);
+                    System.out.println("oopThreeDimensionalArray2()     :  "+arr[i][j][k]);
                 }
             }
         }
@@ -44,12 +44,12 @@ public class MultiDimensionalArrays {
                         {57,69,42}
                 },
         };
-        for(int i =0; i<arr[0][0].length; i++) {
-            for(int j= 0 ; j<arr[0][0].length ; j++) {
-                for(int k =0 ; k<arr[0][k].length ; k++) {
-                    System.out.println("The values are :"+arr[0][0][k]);
-                }
+        System.out.println("Size of the Array is ::"+arr.length);
+        for(int i =0; i<arr[0][0].length-2; i++) {
 
+            for(int j= 0 ; j<arr[0][i].length ; j++) {
+
+                System.out.println("The values are :"+arr[0][i][j]);
             }
         }
 
