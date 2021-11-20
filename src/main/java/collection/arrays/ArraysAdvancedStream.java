@@ -1,4 +1,4 @@
-package collection;
+package collection.arrays;
 
 import data.FilesEnum;
 import data.GetSalesData;

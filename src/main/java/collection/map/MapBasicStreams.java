@@ -3,11 +3,13 @@ package collection.map;
 import data.Employee;
 import data.GetEmployeeData;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class PracticeMap {
+public class MapBasicStreams {
 
     public static void main(String[] args) {
         //getMapEmployeeWithDuplicateKeyException();
@@ -36,7 +38,7 @@ public class PracticeMap {
         System.out.println("ListSize :"+empList.size());
         System.out.println("MapSize :"+result1.size());
         Map<Integer, Employee> result2 = empList.stream()
-                .collect(Collectors.toMap(Employee::getEmpId, e->e , (oldValue, newValue) -> newValue,LinkedHashMap:: new));
+                .collect(Collectors.toMap(Employee::getEmpId, e->e , (oldValue, newValue) -> newValue, LinkedHashMap:: new));
         System.out.println(result2);
         return result1;
     }

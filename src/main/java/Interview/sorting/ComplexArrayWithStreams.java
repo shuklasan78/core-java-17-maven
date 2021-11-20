@@ -1,11 +1,8 @@
-package collection.arrays;
+package Interview.sorting;
 
 import data.Employee;
 import data.GetEmployeeData;
 import lombok.extern.slf4j.Slf4j;
-import Interview.sorting.ImplementMergeSort;
-import Interview.sorting.Quick;
-
 import java.util.*;
 
 @Slf4j

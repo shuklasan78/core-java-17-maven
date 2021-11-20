@@ -1,4 +1,4 @@
-package collection;
+package collection.set;
 
 public class SetBasicStream {
 }

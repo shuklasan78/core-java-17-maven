@@ -1,16 +1,20 @@
 package collection.list;
+
 import data.Employee;
 import data.GetEmployeeData;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class PracticeStreamList {
+public class ListBasicStream {
 
     public static void main(String[] args) {
         practiceBasicStreamList();
-       // practicePeron();
+        // practicePeron();
     }
 
     private static void practiceBasicStreamList() {
