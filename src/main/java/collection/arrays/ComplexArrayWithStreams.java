@@ -3,8 +3,8 @@ package collection.arrays;
 import data.Employee;
 import data.GetEmployeeData;
 import lombok.extern.slf4j.Slf4j;
-import sorting.ImplementMergeSort;
-import sorting.Quick;
+import Interview.sorting.ImplementMergeSort;
+import Interview.sorting.Quick;
 
 import java.util.*;
 

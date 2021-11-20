@@ -107,17 +107,17 @@ public class ListAdvancedStream {
         long start = new Date().getTime();
         List<SalesVO> salesVOList1 = salesVOList.stream().sorted(Comparator.comparing(p->p.getOrderID())).collect(Collectors.toList());
         long end = new Date().getTime();
-        log.info("Time Taken for sorting the list :"+(end-start)+"  Size of List is :=    "+salesVOList1.size());
+        log.info("Time Taken for Interview.sorting the list :"+(end-start)+"  Size of List is :=    "+salesVOList1.size());
         start = new Date().getTime();
         List<SalesVO> salesVOList2 = salesVOList.stream().sorted((a,b) -> a.getOrderID() - b.getOrderID()).collect(Collectors.toList());
         end = new Date().getTime();
-        log.info("Time Taken for sorting-II the list :"+(end-start)+"  Size of List is :=    "+salesVOList2.size());
+        log.info("Time Taken for Interview.sorting-II the list :"+(end-start)+"  Size of List is :=    "+salesVOList2.size());
 
         start = new Date().getTime();
         List<SalesVO> salesVOList3 = salesVOList.stream().sorted((a,b) -> a.getOrderID() - b.getOrderID()).collect(Collectors.toList());
         end = new Date().getTime();
         Collections.sort(salesVOList3,(a,b) -> a.getOrderID() - b.getOrderID());
-        log.info("Time Taken for sorting-III the list :"+(end-start)+"  Size of List is :=    "+salesVOList3.size());
+        log.info("Time Taken for Interview.sorting-III the list :"+(end-start)+"  Size of List is :=    "+salesVOList3.size());
 
         SalesVO first = salesVOList.stream().findFirst().get();
         start = new Date().getTime();

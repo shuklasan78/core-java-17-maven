@@ -75,10 +75,10 @@ public class SummaryCollection {
         Comparator<Employee> empSorterOtherWayFirstNam = Comparator.comparing(Employee::getFirstname);
 
         List<Employee> empList = GetEmployeeData.getEmployeeListWithfewRecords();
-        //simple sorting
+        //simple Interview.sorting
         empList = empList.stream().sorted(empSorterEmpId).toList();
         empList.forEach(p-> System.out.println("EmpId "+p.getEmpId()));
-        //different sorting
+        //different Interview.sorting
         empList = empList.stream().sorted(empSorterOtherWayFirstNam).toList();
         for (Employee employee : empList) {
             System.out.println("The Names are "+employee.getEmpId()+"="+employee.getFirstname());

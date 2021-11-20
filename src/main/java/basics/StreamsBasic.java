@@ -28,7 +28,7 @@ public class StreamsBasic {
         System.out.println("ORIGINAL LIST SIZE :"+employeeList.size());
         Set<Integer> salarySet = new HashSet<>();
         employeeList.stream().forEach(p->salarySet.add(p.getSalary()));
-        //sorting `set into natural order
+        //Interview.sorting `set into natural order
         salarySet.stream().sorted(Comparator.naturalOrder());
         salarySet.stream().sorted(Comparator.reverseOrder());
 
