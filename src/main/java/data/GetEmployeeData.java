@@ -12,7 +12,7 @@ public class GetEmployeeData {
     public static void main(String[] args){
 
         log.info("Size of the list getListWith50KRecords is :"+ getEmployeeList(FilesEnum.EmployeeRecords1M.toString()).size());
-
+        getEmployeeListWithOneMRecords();
     }
 
     public static List<Employee> getEmployeeListWithfewRecords(){

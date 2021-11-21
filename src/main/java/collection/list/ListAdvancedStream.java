@@ -1,8 +1,6 @@
 package collection.list;
 
-import data.FilesEnum;
-import data.GetSalesData;
-import data.SalesVO;
+import data.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -16,7 +14,7 @@ public class ListAdvancedStream {
     public static void main(String[] args) {
         String record = FilesEnum.SalesRecords2M.toString();
         //convertListToCollections(record);
-        //sortList(record);   //collection.sort is giving better performnce.
+        sortList(record);   //collection.sort is giving better performnce.
         //removeDuplicateFromList(record);
         //mergeList(record);
         //searchInList(record);
@@ -125,6 +123,20 @@ public class ListAdvancedStream {
         SalesVO lstElement = salesVOList.get(salesVOList.size() - 1);
         end = new Date().getTime();
         log.info("Time Taken to sort again  :"+(end-start)+"    FirstElement :"+first.getOrderID() +"     LastEmelemt   :"+lstElement.getOrderID());
+        salesVOList.clear();
+        start = new Date().getTime();
+        salesVOList = GetSalesData.getSalesRecord(record).stream()
+                .sorted((o1, o2) -> {
+                    if(o1.getOrderID() == o2.getOrderID())
+                        return o1.getOrderID().compareTo(o2.getOrderID());
+                    else return -1;
+                })
+                .collect(Collectors.toList());
+        int firstEl = salesVOList.stream().findFirst().get().getOrderID();
+        int lstInt = salesVOList.get(salesVOList.size() - 1).getOrderID();
+        end = new Date().getTime();
+        log.info("Time Taken to sort again1  :"+(end-start)+"    firstEl :"+firstEl +"     lstInt   :"+lstInt);
+
     }
 
 

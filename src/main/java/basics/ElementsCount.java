@@ -10,7 +10,7 @@ public class ElementsCount {
 
     }
 
-    static void arrayElementCount(int inputArray[]) {
+    public static void arrayElementCount(int inputArray[]) {
         //Creating a HashMap object with elements of inputArray as keys and their count as values
 
         HashMap<Integer, Integer> elementCountMap = new HashMap<Integer, Integer>();
@@ -31,7 +31,7 @@ public class ElementsCount {
         }
     }
 
-    private static void findDuplicatesUsingHashMap(int[] inputArray)
+    public static void findDuplicatesUsingHashMap(int[] inputArray)
     {
         HashMap<Integer, Integer> map = new HashMap<>();
 
