@@ -1,4 +1,4 @@
-package collection;
+package basics;
 
 public class MultiDimensionalArrays {
 
