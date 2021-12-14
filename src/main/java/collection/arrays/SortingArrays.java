@@ -19,11 +19,11 @@ public class SortingArrays {
     }
 
     private static void sortArrays() {
-        String fileName = FilesEnum.SalesRecords2M.toString();
-        sortArraysNaturalOrder(fileName);
+        String fileName = FilesEnum.SalesRecords5M.toString();
+        //sortArraysNaturalOrder(fileName);
         sortArraysNaturalOrderWithFunction(fileName);
         sortArrayNaturalOrderUisngComparator(fileName);
-        sortArrayReverse(fileName);
+        //sortArrayReverse(fileName);
     }
     private static void sortArraysNaturalOrder(String fileName) {
         SalesVO[] salesArr = GetSalesData.getSalesArray(fileName);
@@ -34,6 +34,7 @@ public class SortingArrays {
         long end = new Date().getTime();
         log.info("Time taken :" +(end-start));
         System.out.println("First Value -1 :"+newArray1[0].getOrderID()+"    Last Value-1 :"+newArray1[newArray1.length-1].getOrderID());
+        salesArr = null;
     }
 
     private static void sortArraysNaturalOrderWithFunction(String fileName) {
@@ -50,6 +51,7 @@ public class SortingArrays {
         log.info("Time taken :" +(end-start));
         System.out.println("First Value -2 :"+salesArr[0].getOrderID()+"    Last Value-2 :"+salesArr[salesArr.length-1].getOrderID());
 
+        salesArr = null;
 
     }
     //This is best performance
@@ -61,6 +63,7 @@ public class SortingArrays {
         long end = new Date().getTime();
         log.info("Time taken :" +(end-start));
         System.out.println("First Value- 3 :"+salesArr[0].getOrderID()+"    Last Value - 3 :"+salesArr[salesArr.length-1].getOrderID());
+        salesArr = null;
 
     }
 
@@ -72,5 +75,7 @@ public class SortingArrays {
         long end = new Date().getTime();
         log.info("Time taken :" +(end-start));
         System.out.println("First Value- 4 :"+salesArr[0].getOrderID()+"    Last Value - 4 :"+salesArr[salesArr.length-1].getOrderID());
+        salesArr = null;
+
     }
 }
