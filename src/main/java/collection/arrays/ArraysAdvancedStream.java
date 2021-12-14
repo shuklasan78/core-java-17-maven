@@ -18,8 +18,8 @@ public class ArraysAdvancedStream {
     public static void main(String[] args) {
         //convertArraysToCollections();
         //removeDuplicatesFromArrays();
-        //sortingArrays();
-        mergingArrays();
+        sortingArrays();
+        //mergingArrays();
     }
 
     private static void mergingArrays() {
@@ -55,20 +55,39 @@ public class ArraysAdvancedStream {
     }
 
     private static void sortingArrays() {
-        SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords5M.toString());
+        SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords2M.toString());
         sortArrays(salesArr);
     }
 
     private static void sortArrays(SalesVO[] salesArr) {
         long start = new Date().getTime();
-        Arrays.sort(salesArr, Comparator.comparing(SalesVO::getOrderID));
-        Arrays.sort(salesArr, Comparator.comparing(p -> p.getOrderID()));
-
+        SalesVO[] newArray1 = salesArr;
+        Arrays.sort(newArray1, Comparator.comparing(SalesVO::getOrderID));
+        Arrays.sort(newArray1, Comparator.comparing(p -> p.getOrderID()));
         long end = new Date().getTime();
         log.info("Time taken :" +(end-start));
-        for(SalesVO intg : salesArr) {
-            //log.info("Order Id "+intg.getOrderID() +"  Country   :"+intg.getCountry());
-        }
+        System.out.println("First Value -1 :"+newArray1[0].getOrderID()+"    Last Value-1 :"+newArray1[newArray1.length-1].getOrderID());
+
+        SalesVO[] newArray2 = salesArr;
+        // Functions for getting first and last names from an Employee
+        Function<SalesVO, Integer> funcbyOrderId = SalesVO::getOrderID;
+        Function<SalesVO, String> functbyCountry = SalesVO::getCountry;
+        // Comparator for comparing Sales by OrderId  then country
+        Comparator<SalesVO> comparestr = Comparator.comparing(funcbyOrderId).thenComparing(functbyCountry);
+        // sort employees in descending order by last name, then first name
+        Arrays.stream(newArray2).sorted(comparestr.reversed());
+        System.out.println("First Value -2 :"+newArray2[0].getOrderID()+"    Last Value-2 :"+newArray2[newArray2.length-1].getOrderID());
+
+        SalesVO[] newArray3 = salesArr ;
+        Comparator<SalesVO> compareByRevenue = (SalesVO o1, SalesVO o2) -> o1.getTotalRevenue().compareTo( o2.getTotalRevenue() );
+        Arrays.stream(newArray3).sorted(compareByRevenue);
+        System.out.println("First Value- 3 :"+newArray3[0].getOrderID()+"    Last Value - 3 :"+newArray3[newArray3.length-1].getOrderID());
+        //sorting arrays in decending order
+        SalesVO[] newArray4 = salesArr ;
+        Arrays.sort(newArray4, Collections.reverseOrder(Comparator.comparing(funcbyOrderId)));
+        System.out.println("First Value- 4 :"+newArray4[0].getOrderID()+"    Last Value - 4 :"+newArray4[newArray4.length-1].getOrderID());
+        //using list it is simple
+        //Collections.sort(Arrays.stream(newArray4).toList(), compareByRevenue);
 
     }
 
@@ -162,3 +181,4 @@ public class ArraysAdvancedStream {
         long end = new Date().getTime();
     }
 }
+
