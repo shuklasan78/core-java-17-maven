@@ -31,28 +31,6 @@ public class ArraysAdvancedStream {
         System.out.println("`The size of the combine array is :"+bks.length);
     }
 
-    private static void convertArraysToCollections() {
-        SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords100Duplicate.toString());
-        log.info("The size of the array is :"+salesArr.length);
-        //converting Arrays to List
-        List<SalesVO> salesList = Arrays.stream(salesArr).collect(Collectors.toList());
-        log.info("The size of the List is :"+salesList.size());
-        //Convert Arrays to Set
-        Set<SalesVO> salesSet = Arrays.stream(salesArr).collect(Collectors.toSet());
-        log.info("The size of the set is :"+salesSet.size());
-        //convert arrays to Map case I - When duplicate keys
-        Map<Integer, SalesVO> salesMap = Arrays
-                .stream(salesArr)
-                .collect(Collectors.toMap(p->p.getOrderID(),p->p, (n,o)->n));
-        log.info("The size of the Map is :"+salesMap.size());
-        //convert arrays to Map case I - When duplicate keys and add them as list
-        Map<Integer, List<SalesVO>> salesMapGrouping = Arrays
-                .stream(salesArr)
-                .collect(Collectors.groupingBy(p->p.getOrderID(),Collectors.toList()));
-        log.info("The size of the Map after grouping :"+salesMap.size());
-
-    }
-
     //Using Hashmap gives best result in removing duplicate from array for 2M records
     private static void removeDuplicatesFromArrays() {
         SalesVO[] salesArr = GetSalesData.getSalesArray(FilesEnum.SalesRecords2M.toString());
