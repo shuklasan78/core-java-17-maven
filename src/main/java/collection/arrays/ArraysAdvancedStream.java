@@ -21,15 +21,7 @@ public class ArraysAdvancedStream {
         //mergingArrays();
     }
 
-    private static void mergingArrays() {
 
-        SalesVO[] arr1 = GetSalesData.getSalesArray(FilesEnum.SalesRecordsBasic1.toString());
-        SalesVO[] arr2 = GetSalesData.getSalesArray(FilesEnum.SalesRecordsBasic2.toString());
-        SalesVO[] bks = (SalesVO[]) Stream.concat(Stream.of(arr1), Stream.of(arr2)).toArray(b -> new SalesVO[b]);
-        //        Set<Book> set = Stream.concat(set1.stream(), set2.stream()).collect(Collectors.toSet());
-        //        List<Book> list = Stream.concat(list1.stream(), list2.stream()).collect(Collectors.toList());
-        System.out.println("`The size of the combine array is :"+bks.length);
-    }
 
     //Using Hashmap gives best result in removing duplicate from array for 2M records
     private static void removeDuplicatesFromArrays() {
