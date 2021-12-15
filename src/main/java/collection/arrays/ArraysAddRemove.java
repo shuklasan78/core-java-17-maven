@@ -16,12 +16,13 @@ public class ArraysAddRemove {
     }
 
     private static void removeDuplicateFromArrays(String filenName) {
-        String fileName1 = FilesEnum.SalesRecords2M.toString();
+        String fileName1 = FilesEnum.SalesRecords100Duplicate.toString();
         removeDuplicateElementFromArrayByPlacingInSet(fileName1);
         removeDuplicateElementFromArrayByUsingDistinctArray(fileName1);
         extractDuplicateElementFromArrayAndStoreInSet(fileName1);
         getDistinctElementfromArrayAndStoreInMap(fileName1);
         addElementToArray(fileName1);
+        removeElementsFromArraysUisngStreamsByIndex(fileName1);
     }
 
     private static void removeDuplicateElementFromArrayByPlacingInSet(String filenName) {
@@ -103,5 +104,17 @@ public class ArraysAddRemove {
         long end = new Date().getTime();
         log.info("Time Taken to add element in SalesVO :"+String.valueOf(end-start));
 
+    }
+
+    private static void removeElementsFromArraysUisngStreamsByIndex(String filenName) {
+        SalesVO[] arr = GetSalesData.getSalesArray(filenName);
+        long start = new Date().getTime();
+        System.out.println("Size of the arr :"+arr.length);
+
+        Arrays.stream(arr).collect(Collectors.toList()).removeIf(p -> p.getOrderID() ==810711038);
+        //arr = removeTheElement(arr, index);
+        long end = new Date().getTime();
+        log.info("Time Taken to remove element in SalesVO :"+String.valueOf(end-start));
+        System.out.println("Size of the arr after deleting :"+arr.length);
     }
 }
