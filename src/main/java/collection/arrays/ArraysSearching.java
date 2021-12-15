@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @Slf4j
-public class SearchingArrays {
+public class ArraysSearching {
 
     public static void main(String[] args) {
         searchArrays();

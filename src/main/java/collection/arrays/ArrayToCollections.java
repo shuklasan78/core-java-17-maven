@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class ConvertingArrayToCollections {
+public class ArrayToCollections {
 
     public static void main(String[] args) {
         convertArrayToCollection();

@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.function.Function;
 
 @Slf4j
-public class SortingArrays {
+public class ArraysSorting {
 
     public static void main(String[] args) {
         sortArrays();
