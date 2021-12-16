@@ -87,7 +87,6 @@ public class ArraysAdvancedStream {
         System.out.println("After deletion :" + Arrays.toString(arr_new));
 
     }
-
     private static void removeElementsUsingValue() {
         int[] arr = new int[]{1,2,3,4,5};
         int[] arr_new = new int[arr.length-1];

@@ -17,12 +17,13 @@ public class ArraysAddRemove {
 
     private static void removeDuplicateFromArrays(String filenName) {
         String fileName1 = FilesEnum.SalesRecords100Duplicate.toString();
-        removeDuplicateElementFromArrayByPlacingInSet(fileName1);
-        removeDuplicateElementFromArrayByUsingDistinctArray(fileName1);
-        extractDuplicateElementFromArrayAndStoreInSet(fileName1);
-        getDistinctElementfromArrayAndStoreInMap(fileName1);
+        //removeDuplicateElementFromArrayByPlacingInSet(fileName1);
+        //removeDuplicateElementFromArrayByUsingDistinctArray(fileName1);
+        //extractDuplicateElementFromArrayAndStoreInSet(fileName1);
+        //getDistinctElementfromArrayAndStoreInMap(fileName1);
         addElementToArray(fileName1);
-        removeElementsFromArraysUisngStreamsByIndex(fileName1);
+        addElementToArrayAtIndex(fileName1);
+        //removeElementsFromArraysUisngStreamsByIndex(fileName1);
     }
 
     private static void removeDuplicateElementFromArrayByPlacingInSet(String filenName) {
@@ -82,8 +83,55 @@ public class ArraysAddRemove {
          log.info("Total records in Map After removing duplicate from Array :"+duplicateValueMap.size());
      }
 
+    private static void addElementToArrayAtIndex(String filenName) {
+        SalesVO[] srcArray = GetSalesData.getSalesArray(filenName);
+        int index = 15;
+        System.out.println("Size of the arr Before Adding :"+srcArray.length +"   srcArray[20]    :"+srcArray[15]);
+        SalesVO newElement = getItem();
+        long start = new Date().getTime();//adding element at the end of the array index.
+        SalesVO[] destArray = new SalesVO[srcArray.length+1];
+        int j = 0;
+        for(int i = 0; i < destArray.length-1; i++) {
+
+            if(i == index) {
+                destArray[i] = newElement;
+            } else {
+                destArray[i] = srcArray[j];
+                j++;
+            }
+        }
+        long end = new Date().getTime();
+        log.info("Time Taken to add element in SalesVO :"+String.valueOf(end-start));
+        System.out.println("Size of the arr After Adding :"+destArray.length+"  srcArray[20]  "+ destArray[15] );
+
+    }
+
     private static void addElementToArray(String filenName) {
         SalesVO[] arr = GetSalesData.getSalesArray(filenName);
+        System.out.println("Size of the arr Before Adding :"+arr.length);
+        SalesVO item = getItem();
+        long start = new Date().getTime();//adding element at the end of the array index.
+        SalesVO[] destArray = Arrays.copyOf(arr, arr.length + 1);
+        destArray[destArray.length - 1]= item;
+        long end = new Date().getTime();
+        log.info("Time Taken to add element in SalesVO :"+String.valueOf(end-start));
+        System.out.println("Size of the arr After Adding :"+destArray.length);
+
+    }
+    private static void removeElementsFromArraysUisngStreamsByIndex(String filenName) {
+        SalesVO[] arr = GetSalesData.getSalesArray(filenName);
+        System.out.println("Size of the arr Before deleting :"+arr.length);
+        long start = new Date().getTime();
+        System.out.println("Size of the arr :"+arr.length);
+
+        Arrays.stream(arr).collect(Collectors.toList()).removeIf(p -> p.getOrderID() ==810711038);
+        //arr = removeTheElement(arr, index);
+        long end = new Date().getTime();
+        log.info("Time Taken to remove element in SalesVO :"+String.valueOf(end-start));
+        System.out.println("Size of the arr after deleting :"+arr.length);
+    }
+
+    private static SalesVO getItem() {
         SalesVO item = new SalesVO();
         item.setRegion("UP");
         item.setCountry("India");
@@ -98,23 +146,6 @@ public class ArraysAddRemove {
         item.setUnitCost(263.33);
         item.setTotalRevenue(4220728.80);
         item.setTotalCost(2542187.82);
-        item.setTotalProfit(1678540.98);
-        long start = new Date().getTime();
-        SalesVO[] addSalesDataArr = {item};
-        long end = new Date().getTime();
-        log.info("Time Taken to add element in SalesVO :"+String.valueOf(end-start));
-
-    }
-
-    private static void removeElementsFromArraysUisngStreamsByIndex(String filenName) {
-        SalesVO[] arr = GetSalesData.getSalesArray(filenName);
-        long start = new Date().getTime();
-        System.out.println("Size of the arr :"+arr.length);
-
-        Arrays.stream(arr).collect(Collectors.toList()).removeIf(p -> p.getOrderID() ==810711038);
-        //arr = removeTheElement(arr, index);
-        long end = new Date().getTime();
-        log.info("Time Taken to remove element in SalesVO :"+String.valueOf(end-start));
-        System.out.println("Size of the arr after deleting :"+arr.length);
+        return item;
     }
 }
