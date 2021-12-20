@@ -16,13 +16,14 @@ public class ArraysAddRemove {
     }
 
     private static void removeDuplicateFromArrays(String filenName) {
-        String fileName1 = FilesEnum.SalesRecords100Duplicate.toString();
+        String fileName1 = FilesEnum.SalesRecords5M.toString();
         //removeDuplicateElementFromArrayByPlacingInSet(fileName1);
         //removeDuplicateElementFromArrayByUsingDistinctArray(fileName1);
         //extractDuplicateElementFromArrayAndStoreInSet(fileName1);
         //getDistinctElementfromArrayAndStoreInMap(fileName1);
-        addElementToArray(fileName1);
-        addElementToArrayAtIndex(fileName1);
+        //addElementToArray(fileName1);
+        //addElementToArrayAtIndex(fileName1);
+        addElementToArrayUsingList(fileName1);
         //removeElementsFromArraysUisngStreamsByIndex(fileName1);
     }
 
@@ -104,6 +105,23 @@ public class ArraysAddRemove {
         log.info("Time Taken to add element in SalesVO :"+String.valueOf(end-start));
         System.out.println("Size of the arr After Adding :"+destArray.length+"  srcArray[20]  "+ destArray[15] );
 
+    }
+
+    private static void addElementToArrayUsingList(String filenName) {
+        SalesVO[] srcArray = GetSalesData.getSalesArray(filenName);
+        System.out.println("Size of the arr Before Adding :"+srcArray.length);
+        SalesVO item = getItem();
+        long start = new Date().getTime();//adding element at the end of the array index.
+        List<SalesVO> arrList = new ArrayList( Arrays.asList(srcArray));
+        arrList.add(item);
+        arrList.add(1,item);
+        //Convert the arraylist back to an array
+        SalesVO[] arr = new SalesVO[arrList.size()];
+        arr = arrList.toArray(arr);
+        long end = new Date().getTime();
+        log.info("Time Taken to add element in SalesVO :"+String.valueOf(end-start));
+        System.out.println("Size of the arr After Adding :"+arr.length);
+        //rodrigo.hammerly@capgemini.com
     }
 
     private static void addElementToArray(String filenName) {

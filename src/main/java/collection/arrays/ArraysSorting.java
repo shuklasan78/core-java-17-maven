@@ -1,15 +1,12 @@
 package collection.arrays;
 
-import data.FilesEnum;
-import data.GetSalesData;
-import data.SalesVO;
+import data.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
+import java.io.IOException;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class ArraysSorting {
@@ -77,5 +74,23 @@ public class ArraysSorting {
         System.out.println("First Value- 4 :"+salesArr[0].getOrderID()+"    Last Value - 4 :"+salesArr[salesArr.length-1].getOrderID());
         salesArr = null;
 
+    }
+
+
+    private static void sortArraysDifferently() throws IOException {
+
+        Comparator<Employee> empIdSorter = (a, b) -> a.getEmpId().compareTo(b.getEmpId());
+        List<Employee> lstEmp = GetEmployeeData.getEmployeeListWithfewRecords().stream().sorted(empIdSorter).collect(Collectors.toList());
+        Employee[] empArray = new Employee[lstEmp.size()];
+        empArray = lstEmp.toArray(empArray);
+        Arrays.sort(empArray, Comparator.comparing(Employee::getEmpId));  // two ways to comparing
+        for (Employee emp : empArray) {
+            System.out.println("Arrays ID  :" + emp.getEmpId());
+        }
+        Comparator<Employee> nameSorter = (a, b) -> a.getUserName().compareToIgnoreCase(b.getUserName());
+        Arrays.sort(empArray, nameSorter);
+        for (Employee emp : empArray) {
+            System.out.println("Arrays username  :" + emp.getUserName());
+        }
     }
 }
